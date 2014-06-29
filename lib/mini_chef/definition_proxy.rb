@@ -8,6 +8,7 @@ module MiniChef
       if block_given?
         template.instance_eval(&block)
       end
+      template.execute
       template
     end
   end
