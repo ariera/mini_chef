@@ -1,3 +1,4 @@
+require "erb"
 require "mini_chef/version"
 require "mini_chef/dsl"
 require "mini_chef/file_utils_macros"
