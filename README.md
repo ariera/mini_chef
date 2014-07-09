@@ -34,9 +34,9 @@ Example:
         owner "root"
         group "root"
         mode 0600
-        variables {
+        variables ({
           dir: "/etc/nginx"
-        }
+        })
       end
 
     end
