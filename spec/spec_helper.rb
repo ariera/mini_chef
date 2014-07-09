@@ -16,4 +16,9 @@ RSpec.configure do |config|
   config.after(:all) do
     FileUtils.rm_rf("#{GEM_TMP_DIR}/.")
   end
+
+  config.before(:example, :cleanup) do
+    FileUtils.rm_rf("#{GEM_TMP_DIR}/.")
+    FileUtils.mkdir_p GEM_TMP_DIR
+  end
 end
