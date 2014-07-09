@@ -1,3 +1,4 @@
+require "erb"
 require "mini_chef/version"
 require "mini_chef/template"
 require "mini_chef/template_context"
