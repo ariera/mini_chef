@@ -1,6 +1,6 @@
 module MiniChef
   class Template
-    attr_accessor :destination
+    attr_accessor :destination #used for testing purposes
 
     TEMPLATE_SETTERS = [:source, :owner, :group, :user, :mode, :variables]
 
@@ -32,6 +32,10 @@ module MiniChef
     end
 
     def save_to_file
+      dirname = File.dirname destination
+      unless File.directory?(dirname)
+        FileUtils.mkdir_p(dirname)
+      end
       File.open(destination, "w+") do |f|
         f.write(render)
       end
@@ -39,6 +43,21 @@ module MiniChef
 
     def execute
       save_to_file
+      set_owner if owner
+      set_group if group
+      set_mode  if mode
+    end
+
+    def set_owner
+      FileUtils.chown(owner, nil, destination)
+    end
+
+    def set_group
+      FileUtils.chown(nil, group, destination)
+    end
+
+    def set_mode
+      FileUtils.chmod(mode, destination)
     end
 
   end
