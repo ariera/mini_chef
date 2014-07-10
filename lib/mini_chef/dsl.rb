@@ -5,32 +5,31 @@ module MiniChef
   class DSL
     def template(destination, &block)
       puts "defining a template pointing to #{destination}."
-      template = Template.new(destination)
-      if block_given?
-        template.instance_eval(&block)
-      end
-      template.execute
-      template
+      run_command(Template.new(destination), &block)
     end
 
     def directory(destination, &block)
       puts "creating directory #{destination}."
-      directory = Directory.new(destination)
-      if block_given?
-        directory.instance_eval(&block)
-      end
-      directory.execute
-      directory
+      run_command(Directory.new(destination), &block)
     end
 
     def execute(cmd, &block)
       puts "executing command `#{cmd}`."
-      execute = Execute.new(cmd)
+      run_command(Execute.new(cmd), &block)
+    end
+
+    def replace(destination, &block)
+      puts "replacing file `#{destination}`."
+      run_command(Replace.new(destination), &block)
+    end
+
+    private
+    def run_command(command, &block)
       if block_given?
-        execute.instance_eval(&block)
+        command.instance_eval(&block)
       end
-      execute.execute
-      execute
+      command.execute
+      command
     end
   end
 end
