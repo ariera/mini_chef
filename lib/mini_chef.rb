@@ -6,6 +6,7 @@ require "mini_chef/execute"
 require "mini_chef/template"
 require "mini_chef/template_context"
 require "mini_chef/directory"
+require "mini_chef/replace"
 
 
 module MiniChef
