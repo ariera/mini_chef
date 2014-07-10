@@ -22,5 +22,15 @@ module MiniChef
       directory.execute
       directory
     end
+
+    def execute(cmd, &block)
+      puts "executing command `#{cmd}`."
+      execute = Execute.new(cmd)
+      if block_given?
+        execute.instance_eval(&block)
+      end
+      execute.execute
+      execute
+    end
   end
 end
